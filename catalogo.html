@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo Doalux</title>
+  <link rel="stylesheet" href="styleL.css">
+</head>
+<body>
+  <header> 
+  <img src="img/image dua - unça - lux.png" alt="Logo" class="logo"> 
+  <nav> 
+    <button onclick="window.location.href='Index.html'">Inicio</button> 
+    <button onclick="window.location.href='manuel.html'">Manual</button> 
+    <button onclick="window.location.href='login.html'">Login</button> 
+  </nav> 
+</header>
+  <main>
+    <aside class="filtro">
+      <h2>Filtro</h2>
+
+      <div class="filtro-box">
+        <h3>Categoria</h3>
+        <label><input type="checkbox" value="vestido"> Vestidos</label>
+        <label><input type="checkbox" value="blusa"> Blusas</label>
+        <label><input type="checkbox" value="calça"> Calças</label>
+      </div>
+
+      <div class="filtro-box">
+        <h3>Cor</h3>
+        <label><input type="checkbox" value="verde"> Verde</label>
+        <label><input type="checkbox" value="preto"> Preto</label>
+        <label><input type="checkbox" value="bege"> Bege</label>
+      </div>
+    </aside>
+
+    <section class="catalogo" id="catalogo">
+      <!-- Produtos -->
+      <div class="produto" data-categoria="vestido" data-cor="verde">
+        <img src="img/vestido1.jpg" alt="Vestido Verde Doalux">
+        <h4>Vestido Longo Verde</h4>
+        <p>R$75,99</p>
+      </div>
+
+      <div class="produto" data-categoria="blusa" data-cor="bege">
+        <img src="img/blusa1.jpg" alt="Blusa Bege Doalux">
+        <h4>Blusa Assimétrica Bege</h4>
+        <p>R$36,99</p>
+      </div>
+
+      <div class="produto" data-categoria="calça" data-cor="preto">
+        <img src="img/calca1.jpg" alt="Calça Preta Doalux">
+        <h4>Calça Social Preta</h4>
+        <p>R$69,99</p>
+      </div>
+
+      <div class="produto" data-categoria="blusa" data-cor="azul">
+        <img src="img/blusa2.jpg" alt="Blusa Azul Doalux">
+        <h4>Blusa Frente Única Azul</h4>
+        <p>R$42,90</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="scriptL.js"></script>
+</body>
+</html>

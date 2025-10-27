@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagrama Técnico - E-commerce</title>
+    
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #666666;
+        padding: 20px;
+        color: #333;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: #f9f9f9;
+        border-radius: 15px;
+        box-shadow: 0 10px 50px rgba(0,0,0,0.3);
+        padding: 30px;
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 3px solid #888;
+    }
+
+    .header h1 {
+        color: #555;
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+
+    .header p {
+        color: #777;
+        font-size: 14px;
+    }
+
+    .diagram-area {
+        position: relative;
+        min-height: 600px;
+        background: #f0f0f0;
+        border-radius: 10px;
+        padding: 30px;
+        margin-bottom: 30px;
+    }
+
+    .layer {
+        margin-bottom: 40px;
+    }
+
+    .layer-title {
+        font-size: 14px;
+        font-weight: bold;
+        color: #555;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .components {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: row;
+    }
+
+    .component {
+        background: #fff;
+        border: 2px solid #999;
+        border-radius: 8px;
+        padding: 12px 15px;
+        cursor: pointer;
+        transition: all 0.3s;
+        min-width: 140px;
+        text-align: center;
+        position: relative;
+        color: #333;
+    }
+
+    .component:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        background: #777;
+        color: #fff;
+        border-color: #555;
+    }
+
+    .component.active {
+        background: linear-gradient(135deg, #555 0%, #777 100%);
+        color: white;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+    }
+
+    .component-icon {
+        font-size: 24px;
+        margin-bottom: 6px;
+    }
+
+    .component-name {
+        font-weight: bold;
+        font-size: 12px;
+    }
+
+    .connector {
+        width: 2px;
+        height: 30px;
+        background: #999;
+        margin: 0 auto;
+        opacity: 0.4;
+    }
+
+    .details-panel {
+        background: #fff;
+        border: 2px solid #999;
+        border-radius: 10px;
+        padding: 25px;
+        margin-top: 20px;
+        display: none;
+        animation: slideIn 0.3s ease-out;
+        color: #333;
+    }
+
+    .details-panel.show {
+        display: block;
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .details-panel h3 {
+        color: #555;
+        margin-bottom: 15px;
+        font-size: 24px;
+    }
+
+    .details-panel h4 {
+        color: #666;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+
+    .details-panel ul {
+        margin-left: 20px;
+        line-height: 1.8;
+    }
+
+    .details-panel li {
+        margin-bottom: 8px;
+    }
+
+    .close-btn {
+        float: right;
+        background: #666;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .close-btn:hover {
+        background: #444;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 4px 10px;
+        background: #555;
+        color: white;
+        border-radius: 12px;
+        font-size: 11px;
+        margin: 3px;
+    }
+
+    .legend {
+        background: #f0f0f0;
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 4px solid #999;
+    }
+
+    .legend h4 {
+        color: #555;
+        margin-bottom: 10px;
+    }
+
+    .legend p {
+        font-size: 13px;
+        color: #666;
+        margin: 5px 0;
+    }
+
+    @media (max-width: 768px) {
+        .components {
+            flex-direction: row;
+            overflow-x: auto;
+            justify-content: flex-start;
+            padding-bottom: 10px;
+        }
+        
+        .component {
+            min-width: 140px;
+            flex-shrink: 0;
+        }
+        
+        .layer {
+            margin-bottom: 30px;
+        }
+    }
+    .back-btn {
+    background: #555;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.3s;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.back-btn:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
+</style>
+
+<body>
+    <div class="container">
+        <div class="header">
+    <button class="back-btn" onclick="window.location.href='index.html'">⬅ Voltar à Página Inicial</button>
+    <h1>🛒 Arquitetura Técnica - Loja Fácil Online</h1>
+    <p>Diagrama Interativo do Sistema | Clique nos componentes para ver detalhes</p>
+</div>
+
+
+        <div class="diagram-area">
+            <!-- Camada de Apresentação -->
+            <div class="layer">
+                <div class="layer-title">📱 Camada de Apresentação (Frontend)</div>
+                <div class="components">
+                    <div class="component" data-component="home">
+                        <div class="component-icon">🏠</div>
+                        <div class="component-name">Página Inicial</div>
+                    </div>
+                    <div class="component" data-component="catalog">
+                        <div class="component-icon">📦</div>
+                        <div class="component-name">Catálogo</div>
+                    </div>
+                    <div class="component" data-component="cart">
+                        <div class="component-icon">🛒</div>
+                        <div class="component-name">Carrinho</div>
+                    </div>
+                    <div class="component" data-component="checkout">
+                        <div class="component-icon">💳</div>
+                        <div class="component-name">Checkout</div>
+                    </div>
+                    <div class="component" data-component="account">
+                        <div class="component-icon">👤</div>
+                        <div class="component-name">Área do Cliente</div>
+                    </div>
+                    <div class="component" data-component="admin">
+                        <div class="component-icon">⚙️</div>
+                        <div class="component-name">Painel Admin</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="connector"></div>
+
+            <!-- Camada de Lógica de Negócio -->
+            <div class="layer">
+                <div class="layer-title">⚡ Camada de Lógica de Negócio (Backend)</div>
+                <div class="components">
+                    <div class="component" data-component="auth">
+                        <div class="component-icon">🔐</div>
+                        <div class="component-name">Autenticação</div>
+                    </div>
+                    <div class="component" data-component="products">
+                        <div class="component-icon">📊</div>
+                        <div class="component-name">Gestão Produtos</div>
+                    </div>
+                    <div class="component" data-component="orders">
+                        <div class="component-icon">📋</div>
+                        <div class="component-name">Processamento</div>
+                    </div>
+                    <div class="component" data-component="inventory">
+                        <div class="component-icon">📦</div>
+                        <div class="component-name">Controle Estoque</div>
+                    </div>
+                    <div class="component" data-component="payment">
+                        <div class="component-icon">💰</div>
+                        <div class="component-name">Gateway Pagamento</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="connector"></div>
+
+            <!-- Camada de Dados -->
+            <div class="layer">
+                <div class="layer-title">💾 Camada de Dados e Integrações</div>
+                <div class="components">
+                    <div class="component" data-component="database">
+                        <div class="component-icon">🗄️</div>
+                        <div class="component-name">Banco de Dados</div>
+                    </div>
+                    <div class="component" data-component="security">
+                        <div class="component-icon">🛡️</div>
+                        <div class="component-name">Segurança</div>
+                    </div>
+                    <div class="component" data-component="integrations">
+                        <div class="component-icon">🔌</div>
+                        <div class="component-name">APIs Externas</div>
+                    </div>
+                    <div class="component" data-component="reports">
+                        <div class="component-icon">📈</div>
+                        <div class="component-name">Relatórios</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Painel de Detalhes -->
+        <div id="detailsPanel" class="details-panel"></div>
+
+        <!-- Legenda -->
+        <div class="legend">
+            <h4>💡 Como usar este diagrama:</h4>
+            <p><strong>Clique</strong> em qualquer componente para ver suas funcionalidades e detalhes técnicos</p>
+            <p><strong>Navegue</strong> pelas três camadas da arquitetura: Apresentação, Lógica de Negócio e Dados</p>
+        </div>
+    </div>
+
+    <script>
+        const componentData = {
+            home: {
+                title: '🏠 Página Inicial',
+                description: 'Ponto de entrada principal da plataforma',
+                features: [
+                    'Barra de Navegação Superior com acesso rápido',
+                    'Banner Principal com promoções em destaque',
+                    'Categorias em Destaque',
+                    'Produtos em Promoção',
+                    'Seção de Novidades',
+                    'Rodapé com links úteis e informações'
+                ],
+                tech: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design']
+            },
+            catalog: {
+                title: '📦 Catálogo de Produtos',
+                description: 'Sistema completo de listagem e busca de produtos',
+                features: [
+                    'Busca avançada com autocompletar',
+                    'Filtros: Preço, marca, cor, tamanho, avaliação',
+                    'Ordenação: Relevância, preço, mais vendidos',
+                    'Visualização em grid ou lista',
+                    'Detalhes completos do produto',
+                    'Sistema de avaliações e comentários',
+                    'Produtos relacionados e sugestões'
+                ],
+                tech: ['React/Vue', 'API REST', 'Elasticsearch', 'Cache']
+            },
+            cart: {
+                title: '🛒 Carrinho de Compras',
+                description: 'Gerenciamento de produtos antes da finalização',
+                features: [
+                    'Adicionar/remover produtos dinamicamente',
+                    'Alterar quantidades em tempo real',
+                    'Cálculo automático de subtotais',
+                    'Cálculo de frete por CEP',
+                    'Aplicação de cupons de desconto',
+                    'Resumo total da compra',
+                    'Persistência entre sessões'
+                ],
+                tech: ['LocalStorage/SessionStorage', 'JavaScript', 'API Correios']
+            },
+            checkout: {
+                title: '💳 Processo de Checkout',
+                description: 'Finalização segura da compra em etapas',
+                features: [
+                    'Etapa 1: Identificação (Login ou visitante)',
+                    'Etapa 2: Endereço de entrega',
+                    'Etapa 3: Cálculo de frete',
+                    'Etapa 4: Forma de pagamento (Cartão, Boleto, PIX)',
+                    'Etapa 5: Revisão final',
+                    'Etapa 6: Confirmação e número do pedido',
+                    'Envio de email de confirmação'
+                ],
+                tech: ['SSL/TLS', 'PCI Compliance', 'Gateway de Pagamento', 'Tokenização']
+            },
+            account: {
+                title: '👤 Área do Cliente',
+                description: 'Painel personalizado do usuário',
+                features: [
+                    'Meus Pedidos (histórico completo)',
+                    'Rastreamento de pedidos em tempo real',
+                    'Dados Cadastrais editáveis',
+                    'Gerenciamento de endereços',
+                    'Formas de pagamento salvas',
+                    'Lista de Desejos',
+                    'Avaliações e comentários',
+                    'Cupons disponíveis'
+                ],
+                tech: ['Autenticação JWT', 'Dashboard React', 'API RESTful']
+            },
+            admin: {
+                title: '⚙️ Painel Administrativo',
+                description: 'Dashboard completo para gestão do e-commerce',
+                features: [
+                    'Dashboard com KPIs e métricas',
+                    'Gestão de produtos e categorias',
+                    'Controle de estoque com alertas',
+                    'Processamento de pedidos',
+                    'Gerenciamento de clientes',
+                    'Sistema de relatórios avançados',
+                    'Configurações gerais da plataforma',
+                    'Logs e auditoria'
+                ],
+                tech: ['Admin Panel Framework', '2FA', 'Role-Based Access', 'Charts.js']
+            },
+            auth: {
+                title: '🔐 Sistema de Autenticação',
+                description: 'Gerenciamento seguro de acesso',
+                features: [
+                    'Cadastro de usuários com validação',
+                    'Login com email/senha',
+                    'Autenticação em duas etapas (2FA)',
+                    'Recuperação de senha por email',
+                    'Tokens JWT com refresh',
+                    'Controle de sessões',
+                    'Diferentes níveis de acesso (Cliente, Vendedor, Admin)'
+                ],
+                tech: ['JWT', 'bcrypt', 'OAuth 2.0', 'Redis Session']
+            },
+            products: {
+                title: '📊 Gestão de Produtos',
+                description: 'Sistema completo de gerenciamento de catálogo',
+                features: [
+                    'Cadastro de produtos com múltiplas imagens',
+                    'Variações (tamanho, cor, modelo)',
+                    'Categorias e subcategorias',
+                    'Sistema de SKU único',
+                    'Preços e promoções',
+                    'Descrições e especificações técnicas',
+                    'Tags e palavras-chave para SEO',
+                    'Importação/exportação em massa'
+                ],
+                tech: ['CRUD API', 'Image Processing', 'CDN', 'Database Indexing']
+            },
+            orders: {
+                title: '📋 Processamento de Pedidos',
+                description: 'Gestão completa do ciclo de vida dos pedidos',
+                features: [
+                    'Recepção e validação de pedidos',
+                    'Status: Aguardando → Confirmado → Separação → Enviado → Entregue',
+                    'Notificações automáticas por email/SMS',
+                    'Integração com transportadoras',
+                    'Geração de etiquetas de envio',
+                    'Sistema de rastreamento',
+                    'Gestão de cancelamentos e devoluções',
+                    'Histórico completo de alterações'
+                ],
+                tech: ['State Machine', 'Queue System', 'Email Service', 'Webhook']
+            },
+            inventory: {
+                title: '📦 Controle de Estoque',
+                description: 'Gerenciamento inteligente de inventário',
+                features: [
+                    'Controle de quantidades em tempo real',
+                    'Alertas de estoque baixo',
+                    'Reserva automática ao adicionar ao carrinho',
+                    'Liberação de estoque em carrinho abandonado',
+                    'Movimentação de entrada/saída',
+                    'Inventário periódico',
+                    'Relatórios de giro de estoque',
+                    'Previsão de demanda'
+                ],
+                tech: ['Real-time Updates', 'Queue Management', 'Analytics', 'Cron Jobs']
+            },
+            payment: {
+                title: '💰 Gateway de Pagamento',
+                description: 'Processamento seguro de transações',
+                features: [
+                    'Cartão de Crédito (parcelamento)',
+                    'Cartão de Débito',
+                    'Boleto Bancário',
+                    'PIX (pagamento instantâneo)',
+                    'Carteiras digitais',
+                    'Tokenização de dados sensíveis',
+                    'Processamento antifraude',
+                    'Conciliação automática',
+                    'Split de pagamento para marketplace'
+                ],
+                tech: ['PagSeguro/Mercado Pago', 'PCI DSS', 'Encryption', 'Fraud Detection']
+            },
+            database: {
+                title: '🗄️ Banco de Dados',
+                description: 'Armazenamento e gerenciamento de dados',
+                features: [
+                    'Tabelas principais: Usuários, Produtos, Pedidos, Estoque',
+                    'Relacionamentos otimizados',
+                    'Índices para performance',
+                    'Backup automático diário',
+                    'Replicação para alta disponibilidade',
+                    'Cache de queries frequentes',
+                    'Logs de auditoria',
+                    'Versionamento de dados críticos'
+                ],
+                tech: ['PostgreSQL/MySQL', 'Redis Cache', 'MongoDB (logs)', 'Backup Strategy']
+            },
+            security: {
+                title: '🛡️ Segurança',
+                description: 'Proteção de dados e conformidade',
+                features: [
+                    'Criptografia SSL/TLS para todas as comunicações',
+                    'Criptografia de senhas com bcrypt',
+                    'Proteção contra SQL Injection',
+                    'Proteção contra XSS e CSRF',
+                    'Rate limiting para APIs',
+                    'Firewall de aplicação (WAF)',
+                    'Conformidade com LGPD',
+                    'Monitoramento de vulnerabilidades',
+                    'Logs de segurança e auditoria'
+                ],
+                tech: ['SSL/TLS', 'WAF', 'OWASP Top 10', 'Security Headers', 'Monitoring']
+            },
+            integrations: {
+                title: '🔌 APIs e Integrações Externas',
+                description: 'Conexões com serviços terceiros',
+                features: [
+                    'API dos Correios (cálculo de frete)',
+                    'Gateways de pagamento',
+                    'Transportadoras (rastreamento)',
+                    'Serviços de email (transacional)',
+                    'SMS para notificações',
+                    'Google Analytics',
+                    'Facebook Pixel',
+                    'ERP/CRM (opcional)',
+                    'Marketplaces (integração)'
+                ],
+                tech: ['RESTful API', 'Webhooks', 'OAuth', 'API Gateway', 'Rate Limiting']
+            },
+            reports: {
+                title: '📈 Sistema de Relatórios',
+                description: 'Análises e inteligência de negócio',
+                features: [
+                    'Vendas por período (diário, mensal, anual)',
+                    'Produtos mais vendidos',
+                    'Desempenho de categorias',
+                    'Análise de clientes (recorrência, ticket médio)',
+                    'Relatório financeiro consolidado',
+                    'Taxa de conversão do funil',
+                    'Carrinho abandonado',
+                    'Gráficos interativos',
+                    'Exportação em PDF/Excel'
+                ],
+                tech: ['Data Warehouse', 'BI Tools', 'Chart.js', 'Export Libraries', 'Cron Jobs']
+            }
+        };
+
+        const detailsPanel = document.getElementById('detailsPanel');
+        const components = document.querySelectorAll('.component');
+
+        components.forEach(component => {
+            component.addEventListener('click', function() {
+                const componentId = this.getAttribute('data-component');
+                const data = componentData[componentId];
+                
+                // Remove active class from all
+                components.forEach(c => c.classList.remove('active'));
+                
+                // Add active to clicked
+                this.classList.add('active');
+                
+                // Build details HTML
+                let html = `
+                    <button class="close-btn" onclick="closeDetails()">✕ Fechar</button>
+                    <h3>${data.title}</h3>
+                    <p style="color: #666; margin-bottom: 20px; font-style: italic;">${data.description}</p>
+                    
+                    <h4>⚡ Funcionalidades Principais:</h4>
+                    <ul>
+                        ${data.features.map(f => `<li>${f}</li>`).join('')}
+                    </ul>
+                    
+                    <h4>🔧 Tecnologias:</h4>
+                    <div>
+                        ${data.tech.map(t => `<span class="badge">${t}</span>`).join('')}
+                    </div>
+                `;
+                
+                detailsPanel.innerHTML = html;
+                detailsPanel.classList.add('show');
+                
+                // Scroll to details
+                detailsPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+        });
+
+        function closeDetails() {
+            detailsPanel.classList.remove('show');
+            components.forEach(c => c.classList.remove('active'));
+            
+            // Scroll suave de volta para a área dos ícones/componentes
+            const diagramArea = document.querySelector('.diagram-area');
+            if (diagramArea) {
+                diagramArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    </script>
+</body>
+</html>

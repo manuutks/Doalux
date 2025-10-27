@@ -1,0 +1,125 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Corpo */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f2f2f2;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* -------------------- HEADER -------------------- */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 30px;
+  background-color: #f2f2f2;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header img {
+  width: 100px;
+  height: auto;
+}
+
+nav {
+  display: flex;
+  gap: 15px;
+}
+
+nav button {
+  background-color: transparent;
+  border: 2px solid #333;
+  padding: 8px 15px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+nav button:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+/* -------------------- CONTAINER CENTRAL -------------------- */
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 30px;
+  text-align: center;
+}
+
+/* -------------------- FORMULÁRIO -------------------- */
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  background-color: #e6e6e6;
+  padding: 25px;
+  border-radius: 12px;
+  width: 320px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+label {
+  font-weight: bold;
+  color: #444;
+  align-self: flex-start;
+}
+
+input[type="text"] {
+  background-color: white;
+  color: #333;
+  border: 1px solid #555;
+  border-radius: 5px;
+  padding: 8px;
+  width: 100%;
+}
+
+/* -------------------- INFORMAÇÕES DE CONTATO -------------------- */
+article {
+  background-color: #555;
+  color: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 320px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* -------------------- RESPONSIVIDADE -------------------- */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .container {
+    gap: 20px;
+  }
+
+  section, article {
+    width: 90%;
+  }
+}
